@@ -1,0 +1,32 @@
+h1.title {
+    display: inline-block;
+    align-items: center;
+    size: 3rem;
+    color: rgb(0, 128, 0);
+    box-shadow: #ff0 0 -2px 10px;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+h2.role {
+    display: grid;
+}
+
+.card {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 75px 25px 25px;
+    padding: 5px;
+    width: 100vh;
+    height: fit-content;
+}
+
+.secondary {
+    color: black;
+}
+
+.sticker {
+    height: 20px;
+    width: 20px;
+}

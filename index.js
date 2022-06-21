@@ -170,11 +170,13 @@ function getEngineerInfo() {
 
 //CREATE THE DIVS FOR THE MANAGER, INTERN, AND ENGINEER
 const buildTeam = (team) => {
-    let htmlBody = "";
+    let managerHtmlBody = "";
+    let engineerHtmlBody = "";
+    let internHtmlBody = "";
     for (let i = 0; i < team.length; i++) {
         if (team[i].getRole() === "Manager") {
             let managerHtml = `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <div class="card-header">MANAGER</div>
+                        <div class="card-header">MANAGER<img src="manager.png" class="sticker" /></div>
                     <h3 class="card-title"><span class="secondary">Name:</span> ${
                       team[i].name
                     }</h3>
@@ -189,7 +191,7 @@ const buildTeam = (team) => {
                     ].getOfficeNumber()}</h5>
                     </div>
                     `;
-            htmlBody += managerHtml;
+            managerHtmlBody += managerHtml;
         } else if (team[i].getRole() === "Engineer") {
             let engineerHtml = `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                  <div class="card-header">ENGINEER<img src='manager.png'/></div>
@@ -198,22 +200,57 @@ const buildTeam = (team) => {
                         <h5 class="card-text"><span class="secondary">Email:</span> ${team[i].email}</h5>
                 <h5 class="card-text"><span class="secondary">Github:</span> ${team[i].github}</h5>
                 </div>`;
-            htmlBody += engineerHtml;
+            engineerHtmlBody += engineerHtml;
         } else if (team[i].getRole() === "Intern") {
             let internHtml = `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <div class="card-header">INTERN</div>
+                        <div class="card-header">INTERN<img src="manager.png" class="sticker" /></div>
                         <h3 class="card-title"><span class="secondary">Name:</span> ${team[i].name}</h3>
                         <h5 class="card-text"><span class="secondary">Employee ID:</span> ${team[i].id}</h5>
                         <h5 class="card-text"><span class="secondary">Email:</span> ${team[i].email}</h5>
                         <h5 class="card-text"><span class="secondary">School/University:</span> ${team[i].school}</h5>
                         </div>`;
-            htmlBody += internHtml;
+            internHtmlBody += internHtml;
         }
     }
-    fs.writeFileSync("index.html", generateHtml(htmlBody));
+    fs.writeFileSync(
+        "./dist/index.html",
+        generateHtml(managerHtmlBody, engineerHtmlBody, internHtmlBody)
+    );
 };
 
-const generateHtml = (page) => {
+// Should I pass in the getManagerInfo() here???
+// How do I create an HTML with a manager, intern, and engineer column that only takes in this information?
+// const generateHtml = (manager, intern, engineer) => {
+//     if(manager === getRole(manager)){
+
+//     }
+//     return `<!DOCTYPE html>
+// <html lang="en">
+
+// <head>
+//     <meta charset="UTF-8" />
+//     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+//     <link rel="stylesheet" href="style.css" />
+//     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+//     <title>Employees</title>
+// </head>
+
+// <body>
+// <h1 class="title"> Meet the Team! </h1>
+//     <div class=wrapper>
+//     <h2 class="role">Manager${(manager)}</h2>
+//     <h2 class="role">Engineer${engineer}</h2>
+//     <h2 class="role">Intern${intern}</h2>
+//     </div>
+// </body>
+
+// </html>`;
+// };
+
+// CREATE 3 SEPERATE FUNCTIONS THAT GENERATE A MANAGER, INTERN, AND ENGINEER CARD AND THEN CALL THAT FUNCTION INSIDE THE TEMPLATE LITERALS.
+// I did not do this, instead I created 3 seperate html bodies
+const generateHtml = (manager, engineer, intern) => {
     return `<!DOCTYPE html>
 <html lang="en">
 
@@ -227,7 +264,22 @@ const generateHtml = (page) => {
 </head>
 
 <body>
-    ${page}
+<h1 class="title"> Meet the Team! </h1>
+    <div class=wrapper>
+    <h2 class="role">Manager${manager}</h2>
+        
+
+    </div>
+    <div class=wrapper>
+        <h2 class="role">Engineer${engineer}</h2>
+           
+
+    </div>
+    <div class=wrapper>
+   
+            <h2 class="role">Intern${intern}</h2>
+
+    </div>
 </body>
 
 </html>`;
